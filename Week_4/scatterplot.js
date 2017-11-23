@@ -14,6 +14,7 @@ var margin = {top: 30, right: 30, bottom: 30, left: 50},
 var x = d3.scale.linear().range([0, width]);
 var y = d3.scale.linear().range([height, 0]);
 
+// Uses standard colors for the circles
 var color = d3.scale.category10();
 
 // Define the x and y Axes
@@ -95,12 +96,14 @@ d3.csv("premdata.csv", function(error, data) {
               .style("opacity", 0); 
           });
 
+  // Adds the legend
   var legend = svg.selectAll(".legend")
       .data(color.domain())
     .enter().append("g")
       .attr("class", "legend")
       .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
+  // Creates the color blocks in the legend
   legend.append("rect")
       .attr("x", width - 18)
       .attr("y", height - 80)
@@ -108,6 +111,7 @@ d3.csv("premdata.csv", function(error, data) {
       .attr("height", 18)
       .style("fill", color);
 
+  // Adds text next to the color blockss
   legend.append("text")
       .attr("x", width - 24)
       .attr("y", height - 72)
